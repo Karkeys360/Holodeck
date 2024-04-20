@@ -29,7 +29,7 @@ class ObjaverseRetriever():
         clip_similarities = torch.max(clip_similarities, dim=2).values
 
         query_feature_sbert = self.sbert_model.encode(queries, convert_to_tensor=True, show_progress_bar=False)
-        sbert_similarities = query_feature_sbert @ self.sbert_features.T
+        sbert_similarities = query_feature_sbert.cpu() @ self.sbert_features.T.cpu()
 
         if self.use_text: similarities = clip_similarities + sbert_similarities
         else: similarities = clip_similarities

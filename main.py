@@ -1,5 +1,6 @@
 import ast
 import json
+import multiprocessing
 from tqdm import tqdm
 from argparse import ArgumentParser
 from modules.holodeck import Holodeck
@@ -59,6 +60,7 @@ def generate_variants(args):
 
 
 if __name__ == "__main__":
+    multiprocessing.set_start_method('spawn')
     parser = ArgumentParser()
     parser.add_argument("--mode", help = "Mode to run in (generate_single_scene, generate_multi_scenes or generate_variants).", default = "generate_single_scene")
     parser.add_argument("--query", help = "Query to generate scene from.", default = "a living room")
